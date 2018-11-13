@@ -73,7 +73,7 @@ def linkedlist_insertionSort(alinkedlist):
 
 alinkedlist=UnorderedList()
 alist=list()
-for i in range(1000):
+for i in range(10000):
     x=random.randrange(-1000,1001)
     alinkedlist.add(x)
     alist.append(x)
