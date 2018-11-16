@@ -1,4 +1,5 @@
 import random
+from time import time
 
 class Node:
     def __init__(self,initdata):
@@ -65,11 +66,31 @@ def list_insertionSort(alist):
 
 
 def linkedlist_insertionSort(alinkedlist):
-    '''
+    sortedlist = alinkedlist.head
+    nextnode = alinkedlist.head.next
+    sortedlist.next = None
+    while nextnode != None:
+        currentnode = nextnode
+        nextnode = nextnode.next
+        if currentnode.data < sortedlist.data:
+            currentnode.next = sortedlist
+            sortedlist = currentnode
+        else:
+            searchpointer = sortedlist
+            while searchpointer.next != None and currentnode.data > searchpointer.next.data:
+                searchpointer = searchpointer.next
+            currentnode.next = searchpointer.next
+            searchpointer.next = currentnode
+    alinkedlist.head=sortedlist
 
-    :param alinkedlist:
-    :return:
-    '''
+def linkedlist_print(alinkedlist):
+    current = alinkedlist.head
+    s = '['
+    while current != None:
+        s += str(current.getData())+', '
+        current = current.getNext()
+    s += '\b\b]'
+    print(s)
 
 alinkedlist=UnorderedList()
 alist=list()
@@ -77,3 +98,31 @@ for i in range(10000):
     x=random.randrange(-1000,1001)
     alinkedlist.add(x)
     alist.append(x)
+    
+print(alinkedlist.length())
+
+linkedlist_print(alinkedlist)
+
+listst=time()
+
+list_insertionSort(alist)
+
+listet=time()
+
+print('list:')
+
+print(alist)
+
+print('list time :',listet-listst)
+
+linkedlistst=time()
+
+linkedlist_insertionSort(alinkedlist)
+
+linkedlistet=time()
+
+print('linkedlist:')
+
+linkedlist_print(alinkedlist)
+
+print('linkedlist time :',linkedlistet-linkedlistst)
