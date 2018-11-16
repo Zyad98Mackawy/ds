@@ -97,9 +97,17 @@ alist=list()
 for i in range(10000):
     x=random.randrange(-1000,1001)
     alinkedlist.add(x)
-    alist.append(x)
-    
-print(alinkedlist.length())
+    alist.insert(0,x)
+
+
+
+print('linkedlist length: ',alinkedlist.length())
+
+print('list:')
+
+print(alist)
+
+print('linkedlist:')
 
 linkedlist_print(alinkedlist)
 
