@@ -1,8 +1,6 @@
 import random
 from time import time
 
-#implementation of the NODE class "from the lecture"
-
 class Node:
     def __init__(self,initdata):
         self.data = initdata
@@ -15,7 +13,6 @@ class Node:
         self.data = newdata
     def setNext(self,newnext):
         self.next = newnext
-#implementation of the LINKEDLIST class "from the lecture"
 
 class UnorderedList:
     def __init__(self):
@@ -29,7 +26,12 @@ class UnorderedList:
         self.head = temp
         self.count+=1
     def length(self):
-        return self.count
+        current = self.head
+        count = 0
+        while current != None:
+            count = count + 1
+            current = current.getNext()
+        return count
     def search(self,item):
         current = self.head
         while current != None:
@@ -48,14 +50,11 @@ class UnorderedList:
             else:
                 previous = current
                 current = current.getNext()
-            if previous == None:
-                self.head = current.getNext()
-            else:
-                previous.setNext(current.getNext())
-
-
-#implementation of the LIST INSERTION SORT FUNCTION "from the lecture"
-
+        if previous == None:
+            self.head = current.getNext()
+        else:
+            previous.setNext(current.getNext())
+                
 def list_insertionSort(alist):
     for index in range(1,len(alist)):
 
@@ -68,7 +67,6 @@ def list_insertionSort(alist):
 
         alist[position] = currentvalue
 
-#implementation of the LINKED LIST INSERTION SORT FUNCTION "the task"
 
 def linkedlist_insertionSort(alinkedlist):
     sortedlist = alinkedlist.head                                                                    #we assume that the first node is a sorted list "it has only one element"
@@ -88,14 +86,6 @@ def linkedlist_insertionSort(alinkedlist):
             searchpointer.next = currentnode                                                         #searchpointer -> current -> search (searchpointer.next)
     alinkedlist.head=sortedlist                                                                      #making the sorted list the first element of the linked list "aList[0]"
 
-def linkedlist_print(alinkedlist):
-    current = alinkedlist.head
-    s = '['
-    while current != None:
-        s += str(current.data)+', '
-        current = current.next
-    s += '\b\b]'
-    print(s)
 
 alinkedlist=UnorderedList()
 alist=list()
@@ -104,27 +94,11 @@ for i in range(10000):
     alinkedlist.add(x)
     alist.insert(0,x)
 
-
-print('list:')
-
-print(alist)
-print('list length: ',len(alist))
-
-print('linkedlist:')
-
-linkedlist_print(alinkedlist)
-
-print('linkedlist length: ',alinkedlist.length())
-
 list_start=time()
 
 list_insertionSort(alist)
 
 list_end=time()
-
-print('list:')
-
-print(alist)
 
 print('list time :',list_end-list_start)
 
@@ -133,9 +107,5 @@ linkedlist_start=time()
 linkedlist_insertionSort(alinkedlist)
 
 linkedlist_end=time()
-
-print('linkedlist:')
-
-linkedlist_print(alinkedlist)
 
 print('linkedlist time :',linkedlist_end-linkedlist_start)
